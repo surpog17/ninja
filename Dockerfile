@@ -1,6 +1,13 @@
-# # Pull base image 
-# From tomcat:8-jre8 
+FROM node:14.17.3-buster
 
-# # Maintainer 
-# MAINTAINER "valaxytech@gmail.com" 
-# COPY ./webapp.war /usr/local/tomcat/webapps
+WORKDIR /code
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+COPY . .
+
+
+CMD ["npm","run","start"]
